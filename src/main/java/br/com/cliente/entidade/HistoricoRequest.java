@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class HistoricoRequest {
 
@@ -39,7 +41,7 @@ public class HistoricoRequest {
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Cliente cliente;
-
+	
 	public Integer getId() {
 		return id;
 	}

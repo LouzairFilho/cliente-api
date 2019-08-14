@@ -5,15 +5,30 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Cliente {
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private Integer idade;
+
+	public Cliente() {
+
+	}
+
+	public Cliente(Integer id, String nome, Integer idade) {
+		this.id = id;
+		this.nome = nome;
+		this.idade = idade;
+	}
+
+	public Cliente(Integer id) {
+		this.id = id;
+	}
 
 	public Integer getId() {
 		return id;
@@ -62,6 +77,13 @@ public class Cliente {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", nome=" + nome + ", idade=" + idade + ", getId()=" + getId() + ", getNome()="
+				+ getNome() + ", getIdade()=" + getIdade() + ", hashCode()=" + hashCode() + ", getClass()=" + getClass()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }
