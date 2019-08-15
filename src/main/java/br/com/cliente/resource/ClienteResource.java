@@ -23,7 +23,10 @@ import br.com.cliente.entidade.HistoricoRequest;
 import br.com.cliente.service.ClienteService;
 import br.com.cliente.service.HistoricoRequestService;
 import br.com.cliente.util.RetornoApi;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
+@Api(value = "/cliente-api/v1/clientes")
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/cliente-api/v1/clientes")
@@ -35,6 +38,7 @@ public class ClienteResource {
 	@Autowired
 	HistoricoRequestService historicoRequestService;
 
+	@ApiOperation(value = "Realiza o cadastro de um novo Cliente",notes = "Realiza o cadastro de um novo ClienteS")
 	@PostMapping(value = "/novo")
 	public ResponseEntity<RetornoApi> novo(HttpServletRequest request, @RequestBody Cliente cliente) {
 		String excecao = "Erro ao processar requisição: ";
@@ -83,6 +87,7 @@ public class ClienteResource {
 		}
 	}
 	
+	
 	@GetMapping(value = "/{id}/historico")
 	public ResponseEntity<RetornoApi> buscarPorHistorico(@PathVariable("id") Integer id) {
 		try {
@@ -127,7 +132,7 @@ public class ClienteResource {
 			
 			clienteService.excluirPorId(id);;
 			
-			return new ResponseEntity<RetornoApi>(new RetornoApi(null, 200, "Solicitação realizada com sucesso"), HttpStatus.OK);
+			return new ResponseEntity<RetornoApi>(new RetornoApi(null, 200, "Cliente excluido com sucesso"), HttpStatus.OK);
 		} catch (Exception e) {
 			String excecao = "Erro ao processar requisição: " + e.getMessage();
 			return new ResponseEntity<RetornoApi>(new RetornoApi(null, HttpStatus.BAD_REQUEST.value(), excecao), HttpStatus.BAD_REQUEST);
